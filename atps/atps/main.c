@@ -152,7 +152,6 @@ void mergeSort(int * V, int inicio, int fim) {
                 }
             }
         }
-
     }
 
     for(i = inicio; i <= fim; i++) {
@@ -162,57 +161,62 @@ void mergeSort(int * V, int inicio, int fim) {
     free(V_temp);
 }
 
-void quickSort(int vet[], int esq, int dir) {
-    int pivo = esq,i,ch,j;
-    for(i=esq+1;i<=dir;i++){
-        j = i;
-        if(vet[j] < vet[pivo]){
-         ch = vet[j];
-         while(j > pivo){
-            vet[j] = vet[j-1];
-            j--;
-         }
-         vet[j] = ch;
-         pivo++;
-        }
-    }
-    if(pivo-1 >= esq){
-        quick(vet,esq,pivo-1);
-    }
-    if(pivo+1 <= dir){
-        quick(vet,pivo+1,dir);
-    }
+void quickSort(int * V, int esq, int dir) {
+	int pivo = esq,i,ch,j;
+
+	for(i=esq+1;i<=dir;i++){
+		j = i;
+		if(V[j] < V[pivo]){
+			ch = V[j];
+			while(j > pivo){
+				V[j] = V[j-1];
+				j--;
+			}
+
+			V[j] = ch;
+			pivo++;
+		}
+	}
+
+	if(pivo-1 >= esq){
+		quick(V,esq,pivo-1);
+	}
+
+	if(pivo+1 <= dir){
+		quick(V,pivo+1,dir);
+	}
 }
 
-void heapSort(int a[], int n) {
-    void heapsort(int a[], int n) {
-   int i = n / 2, pai, filho, t;
-   for (;;) {
-      if (i > 0) {
-          i--;
-          t = a[i];
-      } else {
-          n--;
-          if (n == 0) return;
-          t = a[n];
-          a[n] = a[0];
-      }
-      pai = i;
-      filho = i * 2 + 1;
-      while (filho < n) {
-          if ((filho + 1 < n)  &&  (a[filho + 1] > a[filho]))
-              filho++;
-          if (a[filho] > t) {
-             a[pai] = a[filho];
-             pai = filho;
-             filho = pai * 2 + 1;
-          } else {
-             break;
-          }
-      }
-      a[pai] = t;
-   }
-}
+void heapSort(int * V, int n) {
+	int i = n / 2, pai, filho, t;
+	for (;;) {
+		if (i > 0) {
+			i--;
+			t = V[i];
+		} else {
+			n--;
+			if (n == 0) return;
+			t = V[n];
+			V[n] = V[0];
+		}
+
+		pai = i;
+		filho = i * 2 + 1;
+		while (filho < n) {
+			if ((filho + 1 < n)  &&  (V[filho + 1] > V[filho]))
+				filho++;
+
+			if (V[filho] > t) {
+				V[pai] = V[filho];
+				pai = filho;
+				filho = pai * 2 + 1;
+			} else {
+				break;
+			}
+		}
+
+		V[pai] = t;
+	}
 }
 
 
@@ -251,7 +255,7 @@ int main(int argc, const char * argv[])
 
                 break;
             case 2:
-
+0, 
                 do {
                     printf("Digite o algoritmo de ordenação desejado:");
                     printf("\n1. Bubble Sort");
@@ -275,13 +279,13 @@ int main(int argc, const char * argv[])
                             selectionSort();
                             break;
                         case 4:
-                            mergeSort();
+                            mergeSort(&vetResidencias, 0, 999);
                             break;
                         case 5:
-                            quickSort();
+                            quickSort(&vetResidencias, 0, 999);
                             break;
                         case 6:
-                            heapSort();
+                            heapSort(&vetResidencias, 999);
                             break;
                         case 7:
                             return 0;
